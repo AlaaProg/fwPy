@@ -1,5 +1,5 @@
-from fwpy import FmPy 
+from fwPy import FwPy 
 
-app = FmPy()
+app = FwPy()
 
 app.runserver()
