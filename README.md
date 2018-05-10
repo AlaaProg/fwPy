@@ -19,7 +19,6 @@ class index():
  def page(self,argv):
    return sefl.view.render('page.html')
 
-# view att with Controller and requests 
 # can add any var or func our dict or list to view like this : 
   def v(self,argv):
       self.view.title = 'Title Page '
