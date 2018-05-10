@@ -8,7 +8,7 @@ class Controller():
 
 	def __init__(self,request):
 		self.req = request
-		self.view = View(os.getcwd())
+		self.view = View()
 
 	def loader(self,path):
 		return self.loadCtrl(path.strip("/").split("/"))
@@ -31,18 +31,15 @@ class Controller():
 			if load_class.__dict__.get(function):
 				# Loader function 'def'
 				function  = getattr(load_class(),function)
+				
+				return function(pkg[2:])
 
-				argv = pkg[2:]
-
-				return function( argv if len(pkg) > 2 else [] )
-
-			else:
-				return self.error()
+		
+			function  = getattr(load_class(),self.index)
+			return function(pkg[1:])
 
 			
 
-	def error(self):
-		return "Erro Page"
 
 
 	def loadModel(self,clas):
@@ -51,14 +48,14 @@ class Controller():
 			load_model  = getattr(load_model,clas.__name__)
 			setattr(clas,"model",load_model())
 		except Exception as error:
-			setattr(clas,"model",self.ErrorPage)
+			setattr(clas,"model",self.ErrorModel)
 
-		setattr(load_class,"request",self.req)
-		setattr(load_class,"render",self.view.render)
 
+		setattr(clas,"request",self.req )
+		setattr(clas,"view",self.view   )
 
 	def loadDefaultCtrl(self):
 		return self.loadCtrl(["index"])
 
-	def ErrorPage(self):
+	def ErrorModel(self):
 		return "Error Model"
