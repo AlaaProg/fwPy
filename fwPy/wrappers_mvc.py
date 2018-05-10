@@ -9,19 +9,33 @@ class Response(resp):
 		for k,v in headers.items():
 			self.headers.set(k,v)
 
-	# def setCookies(self,key,value):
-	# 	pass
+
+
+	def setCookies(self,k):
+		if k:
+			self.set_cookie(*k)
 
 
 class Request(req):
-	# request = {}
+	req__cookie	= None
+
 
 	def resp_ctx(self):
-		# self.request.update({'path':self.path})
-		self.ctrl = Controller(self)
+		req = {'path':self.path,
+				"method":self.method,
+				"form":self.form,
+				"host":self.host,
+				"headers":self.headers,
+				"cookies":self.cookies,
+				"args":self.args}
 
+		self.ctrl = Controller(req)
 		if self.path == "/":
 			return self.ctrl.loadDefaultCtrl()
-
 		return self.ctrl.loader(self.path)
+
+
+
+	def setCookies(self,*v):
+		self.req__cookie = tuple(v)
 		
