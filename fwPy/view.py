@@ -1,17 +1,29 @@
-from jinja2 import BaseLoader, TemplateNotFound, Template, Environment, select_autoescape
+from jinja2 import (
+				TemplateNotFound, Template,
+				Environment, select_autoescape,
+				PackageLoader,BaseLoader,FileSystemLoader
+		)
+from os.path import getmtime,exists,join
 
-# template = Template('Hello {{ name }}!')
+class Argv:
+	def __init__(self,kw):self.Argvs = {**kw}
+	def __setitem__(self,key,value):self.Argvs.update({key:value})
+	def __getattr__(self,key):return self.Argvs.get(key)
 
-# template.render(name='John Doe')
 
-class MyLoader(BaseLoader):
-	def __init__(self, path):
-		self.path = path
-	def get_source(self, environment, template):
-		path = join(self.path, template)
-		if not exists(path):
-			raise TemplateNotFound(template)
-			mtime = getmtime(path)
-			with file(path) as f:
-				source = f.read().decode('utf-8')
-		return source, path, lambda: mtime == getmtime(path
+
+class View:
+	GLOBALS = {}
+	def __init__(self):
+		self.env = Environment(
+			autoescape = select_autoescape(['html', 'htm']),
+			loader =  FileSystemLoader("view/")
+		)
+	
+	def __setattr__(self,key,value):self.GLOBALS.update({key:value})
+	def __getattr__(self,key):return self.GLOBALS.get(key)
+
+	def render(self,path):
+		template = self.env.get_template(path)
+		return template.render( this= Argv( self.GLOBALS ) )
+
