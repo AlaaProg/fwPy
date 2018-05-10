@@ -11,7 +11,7 @@
 class index():
   
   #Func Index run whene call index with "/"
-	def index(self,argv):
+  def index(self,argv):
 		return self.view.render("index.html")
     
  #          class  def 
