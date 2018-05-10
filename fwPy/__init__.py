@@ -2,7 +2,7 @@ import os
 
 from .server_mvc import server
 
-class FmPy(server):
+class FwPy(server):
 	def __init__(self):
 
 		if not ( os.path.exists("./controller") or os.path.exists("./controler") or os.path.exists("./ctrl") ):
