@@ -4,17 +4,16 @@
 
 ### Controller
 ```
-# not need import anything
-# Controller/index.py 
+
+# controller/index.py 
 class index:
-  
   #Route /
   def index(self,argv):
 		return self.view.render("index.html")
  
  
 
-# Controller/index.py
+# controller/home.py
 class home:
   
   # Route home/
