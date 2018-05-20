@@ -1,6 +1,6 @@
 import os
 
-from .server_mvc import server
+from .server import server
 
 class FwPy(server):
 	def __init__(self):
