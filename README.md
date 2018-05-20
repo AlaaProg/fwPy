@@ -12,48 +12,48 @@ class index:
 	return self.view.render("index.html")
  
 ```
-___controller/home.py___
-```
+controller/home.py
+------------------
+.. code-block:: home
 
-class home:
-  
-  # Route home/
-  def index(self,arg):
-      return "Hello To Home Page "
+	class home:
 
-  #Route home/vtest
-  def vtest(self,argv):
-      self.view.title = 'Title Page '
-      self.view.name  = 'alaa aqgell'
-      self.view.names = ['alaa','ali','muhammed']
-      
-      return self.view.render('home.html')
+	  # Route home/
+	  def index(self,arg):
+	      return "Hello To Home Page "
 
-  #Route home/mtest
-  def mtest(self,argv):
-      self.model.login(username='',password='')
-      return self.view.render('modelTest.html')
+	  #Route home/vtest
+	  def vtest(self,argv):
+	      self.view.title = 'Title Page '
+	      self.view.name  = 'alaa aqgell'
+	      self.view.names = ['alaa','ali','muhammed']
 
-```
+	      return self.view.render('home.html')
+
+	  #Route home/mtest
+	  def mtest(self,argv):
+	      self.model.login(username='',password='')
+	      return self.view.render('modelTest.html')
+
+
 ### view 
-```
-<!-- view/home.html -->
-<html>
-<head>
-	<title> { { this.title } } </title>
-</head>
-<body>
+.. code-block:: html
+	<html>
+	<head>
+		<title> { { this.title } } </title>
+	</head>
+	<body>
 
-   {{ this.name }} 
-  
-  {% for i in this.names %}
-    {{ i }}
-    
-  {% endfor %}
+	   {{ this.name }} 
 
-</body>
-</html>
-```
+	  {% for i in this.names %}
+	    {{ i }}
+
+	  {% endfor %}
+
+	</body>
+	</html>
+
 ### MODEL
 ```
 class home:
