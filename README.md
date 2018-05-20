@@ -6,12 +6,11 @@
 ___controller/index.py___
 
 ```
-# 
 class index:
   
   #Route /
   def index(self,argv):
-		return self.view.render("index.html")
+	return self.view.render("index.html")
  
 ```
 ___controller/home.py___
