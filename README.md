@@ -3,18 +3,19 @@
 ### A very simple framework you designed using the werkzeug and jinja2 library on MVC technology
 
 <h1> Controller </h1>
-
-<code>
-# controller/index.py 
+__controller/index.py__
+```
+# 
 class index:
   
   #Route /
   def index(self,argv):
 		return self.view.render("index.html")
  
-</code>
 ```
-# controller/home.py
+___controller/home.py___
+```
+
 class home:
   
   # Route home/
