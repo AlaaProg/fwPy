@@ -4,9 +4,10 @@
 
 ### Controller
 ```
-
+# not need import anything
 # controller/index.py 
 class index:
+  
   #Route /
   def index(self,argv):
 		return self.view.render("index.html")
@@ -36,7 +37,7 @@ class home:
 ```
 ### view 
 ```
-<!-- view/viewTest.html -->
+<!-- view/home.html -->
 <html>
 <head>
 	<title> {{ this.title }} </title>
