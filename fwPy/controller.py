@@ -1,61 +1,68 @@
 import os,importlib as lib
 from .view import View
 
-class Controller():
-	path_ctrl  = "controller."
-	path_model = "models."
-	index      = "index"
+class Controller:
+	PathCtrl   = "controller."
+	PathModels = "models."
+	Index      = "index"
 
 	def __init__(self,request):
 		self.req = request
 		self.view = View()
 
 	def loader(self,path):
-		return self.loadCtrl(path.strip("/").split("/"))
+		self.url = path.strip("/").split("/")
+
+		if os.path.exists("controller/"+self.url[0]+".py"):
+			return self.loaderClass()
+
+		return self.errorCtrl()
 
 
-	def loadCtrl(self,pkg):
+	def loaderClass(self):
+
+		cl = self.PathCtrl+self.url[0]
+
+		load_ctrl  = lib.import_module(cl)
+
+		load_class  = getattr(load_ctrl,self.url[0])
 		
-		clas      = pkg[0] 
-		function  = pkg[1] if len(pkg) > 1 else self.index
-		# print(function)
+		self.loaderModel(load_class)
 
-		if os.path.exists("controller/"+clas+".py"):
-			# import  file.py from controller
-			load_ctrl  = lib.import_module(self.path_ctrl+clas)
-			# loader Class 
-			load_class  = getattr(load_ctrl,clas)
-			self.loadModel(load_class)
-			
-			# isinclass
-			if load_class.__dict__.get(function):
-				# Loader function 'def'
-				function  = getattr(load_class(),function)
-				
-				return function(pkg[2:])
+		if len(self.url) > 1 and load_class.__dict__.get(self.url[1]):
+			return self.loaderFunc(load_class,self.url[1])
 
-		
-			function  = getattr(load_class(),self.index)
-			return function(pkg[1:])
+		elif load_class.__dict__.get("index"):
+			return self.loaderFunc(load_class,self.Index)
 
-			
+		elif load_class.__dict__.get("error"):
+			return self.loaderFunc(load_class,'error')
+
+		return self.errorFunc(cl+"."+self.url[1] if len(self.url) > 1 else cl+"."+self.Index)
 
 
-
-	def loadModel(self,clas):
+	def loaderModel(self,_class):
 		try:
-			load_model  = lib.import_module(self.path_model+clas.__name__)
-			load_model  = getattr(load_model,clas.__name__)
-			setattr(clas,"model",load_model())
+
+			load_model  = lib.import_module(self.PathModels+_class.__name__)
+			load_model  = getattr(load_model,_class.__name__)
+			setattr(_class,"model",load_model())
+
 		except Exception as error:
-			setattr(clas,"model",self.ErrorModel)
+			setattr(_class,"model",lambda:"No Model: %s"%_class.__name__)
+
+		# set attr to _class Controller 
+		setattr(_class,"request",self.req )
+		setattr(_class,"view",self.view   )
+
+	def loaderFunc(self,clas,func):
+		function  = getattr(clas(),func)
+		return function(self.url[2:] if len(self.url) > 2 else [])
 
 
-		setattr(clas,"request",self.req )
-		setattr(clas,"view",self.view   )
 
-	def loadDefaultCtrl(self):
-		return self.loadCtrl(["index"])
+	def errorFunc(self,_cf):
+		raise Exception("No Function named: '%s' "%_cf)
 
-	def ErrorModel(self):
-		return "Error Model"
+	def errorCtrl(self):
+		raise Exception('No Controller named:  "%s" '%self.url[0])
