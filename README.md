@@ -3,8 +3,8 @@
 ### A very simple framework you designed using the werkzeug and jinja2 library on MVC technology
 
 <h1> Controller </h1>
-```
-# not need import anything
+
+<code>
 # controller/index.py 
 class index:
   
@@ -12,8 +12,8 @@ class index:
   def index(self,argv):
 		return self.view.render("index.html")
  
- 
-
+</code>
+```
 # controller/home.py
 class home:
   
