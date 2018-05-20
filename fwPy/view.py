@@ -1,9 +1,4 @@
-from jinja2 import (
-				TemplateNotFound, Template,
-				Environment, select_autoescape,
-				PackageLoader,BaseLoader,FileSystemLoader
-		)
-from os.path import getmtime,exists,join
+from jinja2 import (Environment, select_autoescape,FileSystemLoader)
 
 class Argv:
 	def __init__(self,kw):self.Argvs = {**kw}
@@ -19,7 +14,7 @@ class View:
 			autoescape = select_autoescape(['html', 'htm']),
 			loader =  FileSystemLoader("view/")
 		)
-	
+
 	def __setattr__(self,key,value):self.GLOBALS.update({key:value})
 	def __getattr__(self,key):return self.GLOBALS.get(key)
 
