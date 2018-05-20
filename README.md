@@ -46,10 +46,10 @@ controller/home.py
 
 		   { { this.name } } 
 
-		  {% for i in this.names %}
+		  { % for i in this.names % }
 		    { { i } }
 
-		  {% endfor %}
+		  { % endfor % }
 
 	</body>
 	</html>
