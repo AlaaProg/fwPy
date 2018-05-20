@@ -40,17 +40,17 @@ class home:
 <!-- view/home.html -->
 <html>
 <head>
-	<title> \{\{ this.title \}\} ' </title>
+	<title> { { this.title } } </title>
 </head>
 <body>
-   ```
+
    {{ this.name }} 
   
   {% for i in this.names %}
     {{ i }}
     
   {% endfor %}
-  ```
+
 </body>
 </html>
 ```
