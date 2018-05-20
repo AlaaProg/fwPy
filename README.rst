@@ -5,17 +5,17 @@
 controller/index.py
 -------------------
 
+```
+class index:
 
-	class index:
-
-	  #Route /
-	  def index(self,argv):
-		return self.view.render("index.html")
-
+  #Route /
+  def index(self,argv):
+	return self.view.render("index.html")
+```
 
 controller/home.py
 ------------------
-
+```
 	class home:
 
 	  # Route home/
@@ -34,10 +34,10 @@ controller/home.py
 	  def mtest(self,argv):
 	      self.model.login(username='',password='')
 	      return self.view.render('modelTest.html')
-
+```
 
 ### view 
-
+```
 	<html>
 	<head>
 		<title> {{ this.title }} </title>
@@ -53,11 +53,12 @@ controller/home.py
 
 	</body>
 	</html>
-
+```
 ### MODEL
-
+```
 	class home:
 	    def login(self,username='',password=''):
 		return 'do samething'
 	    def logout(self,username=''):
 		# some code 
+```
