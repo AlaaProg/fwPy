@@ -2,7 +2,7 @@
 
 ### A very simple framework you designed using the werkzeug and jinja2 library on MVC technology
 
-### Controller
+<h1> Controller </h1>
 ```
 # not need import anything
 # controller/index.py 
