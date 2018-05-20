@@ -1,4 +1,4 @@
-# [fwPy](https://alaaprog.github.io/fwPy/#controller)
+# [fwPy](https://alaaprog.github.io/fwPy/)
 ### A very simple framework you designed using the werkzeug and jinja2 library on MVC technology
 
 ### Controller
