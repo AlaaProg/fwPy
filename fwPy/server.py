@@ -1,14 +1,20 @@
 from werkzeug.serving import run_simple
-from .wrappers_mvc import Response,Request
+from .wrappers   import Response,Request
+
+
+
 
 class server:
 
+
 	def main_app(self, environ, start_response):
+
 		request = Request(environ)
-		# request.pkg = self.pkg
+
 		response = Response(request.resp_ctx())
 
 		response.setCookies(request.req__cookie)
+		response.setHeader(request.req__header)
 		
 		return response(environ, start_response)
 
