@@ -27,7 +27,7 @@ class home:
       self.view.name  = 'alaa aqgell'
       self.view.names = ['alaa','ali','muhammed']
       
-      return self.view.render('viewTest.html')
+      return self.view.render('home.html')
 
   #Route home/mtest
   def mtest(self,argv):
