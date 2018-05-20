@@ -40,16 +40,16 @@ controller/home.py
 
 	<html>
 	<head>
-		<title> { { this.title } } </title>
+		<title> {{ this.title }} </title>
 	</head>
 	<body>
 
-		   { { this.name } } 
+		   {{ this.name }} 
 
-		  { % for i in this.names % }
-		    { { i } }
+		  {% for i in this.names %}
+		    {{ i }}
 
-		  { % endfor % }
+		  {% endfor %}
 
 	</body>
 	</html>
