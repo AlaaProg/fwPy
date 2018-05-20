@@ -3,7 +3,7 @@
 ### A very simple framework you designed using the werkzeug and jinja2 library on MVC technology
 
 <h1> Controller </h1>
-___controller/index.py
+___ controller/index.py
 
 ```
 # 
@@ -14,7 +14,7 @@ class index:
 		return self.view.render("index.html")
  
 ```
-___controller/home.py
+___controller/home.py___
 ```
 
 class home:
