@@ -1,4 +1,4 @@
-from fwPy import FwPy 
+from fwpy import FwPy
 
 app = FwPy()
 
